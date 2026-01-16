@@ -43,6 +43,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { trackEvent, trackCustomEvent } from "@/lib/pixel";
 
 // External image links for faster loading
 const macbookMockup = "https://i.imgur.com/tg0fFKQ.png";
@@ -311,7 +312,10 @@ export const SalesPage = () => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={scrollToPlans}
+            onClick={() => {
+              trackCustomEvent('ClickCTA', { location: 'hero' });
+              scrollToPlans();
+            }}
             className="athena-button text-foreground text-xl px-12 py-5"
           >
             Começar Agora →
@@ -878,6 +882,11 @@ export const SalesPage = () => {
                 href="https://pay.hotmart.com/W102950871U?off=6jeru4fn&bid=1765464759738"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('InitiateCheckout', { 
+                  content_name: 'Plano Mensal', 
+                  value: 34.90, 
+                  currency: 'BRL' 
+                })}
                 className="block w-full py-4 rounded-2xl border-2 border-primary text-foreground font-semibold hover:bg-primary/10 transition-colors text-center"
               >
                 Começar agora →
@@ -927,6 +936,11 @@ export const SalesPage = () => {
                 href="https://pay.hotmart.com/W102950871U?off=tglbzob2&bid=1764979505775"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('InitiateCheckout', { 
+                  content_name: 'Plano Anual', 
+                  value: 287.00, 
+                  currency: 'BRL' 
+                })}
                 className="athena-button w-full text-foreground block text-center"
               >
                 Garantir Plano Anual →
@@ -1050,7 +1064,10 @@ export const SalesPage = () => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={scrollToPlans}
+            onClick={() => {
+              trackCustomEvent('ClickCTA', { location: 'final' });
+              scrollToPlans();
+            }}
             className="athena-button text-foreground text-xl px-16 py-6"
           >
             Quero Clareza Financeira →
