@@ -311,9 +311,25 @@ export const SalesPage = () => {
             Seu sistema financeiro inteligente{" "}
             <span className="text-gradient">está pronto.</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-10">
+          <p className="text-xl text-muted-foreground mb-8">
             Clareza total, todos os dias, direto no WhatsApp.
           </p>
+
+          {/* Hero Mockup - Moved above button */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mb-10 w-full max-w-4xl mx-auto"
+          >
+            <img 
+              src={macbookMockup} 
+              alt="Athena - Sistema financeiro no MacBook e celulares" 
+              className="w-full h-auto drop-shadow-2xl"
+              style={{ filter: "drop-shadow(0 25px 50px hsl(244 100% 63% / 0.3))" }}
+            />
+          </motion.div>
+
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -325,21 +341,6 @@ export const SalesPage = () => {
           >
             Começar Agora →
           </motion.button>
-
-          {/* Hero Mockup */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-12 w-full max-w-4xl mx-auto"
-          >
-            <img 
-              src={macbookMockup} 
-              alt="Athena - Sistema financeiro no MacBook e celulares" 
-              className="w-full h-auto drop-shadow-2xl"
-              style={{ filter: "drop-shadow(0 25px 50px hsl(244 100% 63% / 0.3))" }}
-            />
-          </motion.div>
         </motion.div>
 
         <motion.div
@@ -521,42 +522,7 @@ export const SalesPage = () => {
         </div>
       </section>
 
-      {/* 4. Features Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Tudo que você precisa pra <span className="text-gradient">clareza total</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="athena-card group hover:border-primary/50 transition-all"
-              >
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
-                  <feature.icon className="w-6 h-6 text-secondary" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2 text-foreground">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Como Funciona */}
+      {/* 4. Como a Athena funciona - Seção Fundida */}
       <section className="py-20 px-6 bg-card/30">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -566,7 +532,7 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Clareza em <span className="text-gradient">3 passos simples</span>
+              Como a Athena te dá clareza financeira — <span className="text-gradient">em poucos passos</span>
             </h2>
           </motion.div>
 
@@ -574,26 +540,76 @@ export const SalesPage = () => {
             {/* Connection Line */}
             <div className="hidden md:block absolute top-16 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary opacity-30" />
             
-            {howItWorks.map((item, index) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="text-center relative"
-              >
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-6 relative z-10" style={{ boxShadow: "0 0 40px hsl(244 100% 63% / 0.4)" }}>
-                  <item.icon className="w-10 h-10 text-foreground" />
-                </div>
-                <div className="absolute -top-2 -right-2 md:right-auto md:left-1/2 md:ml-8 w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center text-sm font-bold">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
-              </motion.div>
-            ))}
+            {/* Step 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              className="text-center relative"
+            >
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-6 relative z-10" style={{ boxShadow: "0 0 40px hsl(244 100% 63% / 0.4)" }}>
+                <Send className="w-10 h-10 text-foreground" />
+              </div>
+              <div className="absolute -top-2 -right-2 md:right-auto md:left-1/2 md:ml-8 w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center text-sm font-bold">
+                1
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">Envie seus gastos no WhatsApp</h3>
+              <p className="text-muted-foreground">Texto, áudio ou foto. Você manda do seu jeito.</p>
+            </motion.div>
+
+            {/* Step 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-center relative"
+            >
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-6 relative z-10" style={{ boxShadow: "0 0 40px hsl(244 100% 63% / 0.4)" }}>
+                <Bot className="w-10 h-10 text-foreground" />
+              </div>
+              <div className="absolute -top-2 -right-2 md:right-auto md:left-1/2 md:ml-8 w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center text-sm font-bold">
+                2
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">Athena organiza tudo automaticamente</h3>
+              <p className="text-muted-foreground">Ela entende, classifica e atualiza suas informações — sem planilha, sem dor de cabeça.</p>
+            </motion.div>
+
+            {/* Step 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="text-center relative"
+            >
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-6 relative z-10" style={{ boxShadow: "0 0 40px hsl(244 100% 63% / 0.4)" }}>
+                <LayoutDashboard className="w-10 h-10 text-foreground" />
+              </div>
+              <div className="absolute -top-2 -right-2 md:right-auto md:left-1/2 md:ml-8 w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center text-sm font-bold">
+                3
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">Acompanhe tudo no Painel 360°</h3>
+              <p className="text-muted-foreground">Veja saldos, categorias, metas e evolução da sua grana em um só lugar.</p>
+            </motion.div>
           </div>
+
+          {/* Result */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-green-500/10 border border-green-500/30">
+              <Check className="w-6 h-6 text-green-400 flex-shrink-0" />
+              <p className="text-foreground font-medium">
+                Você ganha clareza real sobre pra onde o dinheiro tá indo — e começa a tomar decisões com segurança.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -898,9 +914,9 @@ export const SalesPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="pricing-card featured relative"
+              className="pricing-card featured relative overflow-visible pt-8"
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold whitespace-nowrap z-10">
                 🔥 Mais Popular
               </div>
               <h3 className="text-xl font-semibold mb-2 text-foreground">Anual</h3>
