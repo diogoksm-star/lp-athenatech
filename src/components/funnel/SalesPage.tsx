@@ -36,14 +36,14 @@ import {
   Flame,
   Heart,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { trackEvent, trackCustomEvent } from "@/lib/pixel";
+import { trackEvent, trackCustomEvent, trackScrollDepth } from "@/lib/pixel";
 
 // External image links for faster loading
 const macbookMockup = "https://i.imgur.com/tg0fFKQ.png";
@@ -249,6 +249,8 @@ const beforeAfter = {
 
 export const SalesPage = () => {
   const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+  const [pricingViewed, setPricingViewed] = useState(false);
+  const pricingRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -264,6 +266,50 @@ export const SalesPage = () => {
       });
     }, 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Track ViewContent when pricing section enters viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !pricingViewed) {
+            setPricingViewed(true);
+            trackEvent('ViewContent', {
+              content_name: 'Pricing Section',
+              content_category: 'Planos',
+              content_ids: ['plano_mensal', 'plano_anual'],
+              value: 287.00,
+              currency: 'BRL'
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (pricingRef.current) {
+      observer.observe(pricingRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [pricingViewed]);
+
+  // Track scroll depth milestones
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+      if (scrollPercent >= 25) trackScrollDepth(25);
+      if (scrollPercent >= 50) trackScrollDepth(50);
+      if (scrollPercent >= 75) trackScrollDepth(75);
+      if (scrollPercent >= 100) trackScrollDepth(100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToPlans = () => {
@@ -821,7 +867,7 @@ export const SalesPage = () => {
       </section>
 
       {/* 11. Pricing Section - Aprimorado */}
-      <section id="pricing" className="py-20 px-6">
+      <section id="pricing" ref={pricingRef} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
