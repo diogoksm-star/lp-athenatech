@@ -52,51 +52,21 @@ const demoGif = "https://i.imgur.com/5Ed7Vi9.gif";
 const features = [
   {
     icon: Sparkles,
-    title: "Clareza Financeira Automática",
-    description: "Registre qualquer gasto com foto, áudio ou texto. A Athena organiza tudo sozinha.",
+    title: "Registre com texto, áudio ou foto",
+    description: "A Athena entende e organiza tudo automaticamente.",
   },
   {
     icon: LayoutDashboard,
     title: "Painel 360°",
-    description: "Entradas, saídas, categorias, padrões e tendências em uma visão completa.",
-  },
-  {
-    icon: Bell,
-    title: "Alertas Inteligentes",
-    description: "Contas, vencimentos, riscos e insights diários direto no seu WhatsApp.",
-  },
-  {
-    icon: BarChart3,
-    title: "Relatórios Personalizados",
-    description: "Gráficos claros para decisões mais inteligentes.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Controle de Investimentos",
-    description: "Acompanhamento simples e direto do seu patrimônio.",
-  },
-  {
-    icon: Target,
-    title: "Metas e Progresso",
-    description: "Visual de avanço automático para suas conquistas financeiras.",
+    description: "Saldos, categorias, metas e evolução sem planilhas.",
   },
 ];
 
 const benefits = [
   {
     icon: Eye,
-    title: "Você passa a enxergar o que antes era invisível",
-    description: "Cada centavo ganha visibilidade. Adeus surpresas no fim do mês.",
-  },
-  {
-    icon: Scissors,
-    title: "Você elimina desperdícios sem esforço",
-    description: "A Athena identifica padrões e te mostra onde cortar sem dor.",
-  },
-  {
-    icon: Brain,
-    title: "Você toma decisões com clareza, não emoção",
-    description: "Dados reais no lugar de achismos. Seu dinheiro agradece.",
+    title: "O que muda na sua vida",
+    description: "Você começa a enxergar o que antes passava batido. Adeus surpresas. Bem-vinda tranquilidade.",
   },
 ];
 
@@ -113,17 +83,17 @@ const bonuses = [
   {
     icon: BarChart3,
     title: "Relatório mensal de hábitos",
-    description: "Análise completa dos seus padrões financeiros todo mês.",
+    description: "",
   },
   {
     icon: Target,
     title: "Plano de metas personalizado",
-    description: "Metas criadas especificamente para sua realidade.",
+    description: "",
   },
   {
     icon: MessageCircle,
     title: "Suporte prioritário no WhatsApp",
-    description: "Atendimento rápido sempre que precisar.",
+    description: "",
   },
 ];
 
@@ -132,21 +102,7 @@ const testimonials = [
     name: "Carolina S.",
     role: "Empreendedora",
     avatar: "CS",
-    text: "Em 2 semanas eu já tinha clareza total de para onde meu dinheiro ia. Nunca foi tão fácil me organizar!",
-    rating: 5,
-  },
-  {
-    name: "Ricardo M.",
-    role: "Autônomo",
-    avatar: "RM",
-    text: "A Athena salvou minha vida financeira. Hoje sei exatamente quanto posso gastar e investir todo mês.",
-    rating: 5,
-  },
-  {
-    name: "Juliana P.",
-    role: "Professora",
-    avatar: "JP",
-    text: "Finalmente consegui sair do vermelho. Os alertas da Athena me ajudam a não esquecer nenhuma conta.",
+    text: "Em 2 semanas eu já sabia pra onde ia cada centavo. Nunca foi tão fácil me organizar.",
     rating: 5,
   },
 ];
@@ -155,22 +111,22 @@ const targetAudience = [
   {
     icon: Briefcase,
     title: "Autônomos e Freelancers",
-    description: "Que perdem tempo com planilhas e precisam de organização automática.",
+    description: "Que querem organização automática",
   },
   {
     icon: Home,
     title: "Famílias",
-    description: "Que querem organização financeira sem complicação no dia a dia.",
+    description: "Que precisam de controle sem stress",
   },
   {
     icon: Users,
-    title: "Empreendedores e MEIs",
-    description: "Que precisam separar finanças pessoais e do negócio com clareza.",
+    title: "MEIs",
+    description: "Que querem separar pessoal e empresa",
   },
   {
     icon: GraduationCap,
-    title: "Quem quer começar a investir",
-    description: "Mas não sabe quanto sobra no fim do mês para aplicar.",
+    title: "Quem quer investir",
+    description: "Mas nunca sabe quanto sobra",
   },
 ];
 
@@ -213,39 +169,42 @@ const howItWorks = [
   {
     step: 1,
     icon: Smartphone,
-    title: "Envie pelo WhatsApp",
-    description: "Foto de cupom, áudio explicando o gasto, ou texto simples. Como preferir.",
+    title: "Mande no WhatsApp",
+    description: "Cupom, áudio ou mensagem. Como preferir.",
   },
   {
     step: 2,
     icon: Bot,
-    title: "Athena organiza tudo",
-    description: "Categorização automática, cálculos e organização sem você fazer nada.",
+    title: "A Athena organiza",
+    description: "Classifica, calcula e estrutura tudo sozinha.",
   },
   {
     step: 3,
     icon: PieChart,
     title: "Receba insights",
-    description: "Relatórios, alertas e dicas personalizadas direto no seu WhatsApp.",
+    description: "Alertas, relatórios e dicas direto no seu celular.",
   },
 ];
 
 const beforeAfter = {
   before: [
     "Surpresas no fim do mês",
-    "Contas esquecidas e juros",
-    "Sem saber para onde o dinheiro vai",
-    "Estresse com finanças",
-    "Decisões por impulso",
+    "Contas esquecidas",
+    "Dinheiro \"sumido\"",
   ],
   after: [
-    "Clareza total de cada centavo",
+    "Cada centavo no radar",
     "Alertas antes do vencimento",
-    "Visão completa do seu dinheiro",
-    "Paz e controle financeiro",
-    "Decisões com dados reais",
+    "Visão completa das suas finanças",
   ],
 };
+
+const commonErrors = [
+  "Planilhas que duram só uma semana",
+  "Caderno de anotações que vira bagunça",
+  "Gastos esquecidos ou fora do controle",
+  "Chegar no fim do mês sem saber pra onde foi o dinheiro",
+];
 
 export const SalesPage = () => {
   const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
@@ -335,7 +294,7 @@ export const SalesPage = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-4"
           >
             <BadgeCheck className="w-4 h-4 text-secondary" />
-            <span className="text-sm text-foreground">Sistema Personalizado para Você</span>
+            <span className="text-sm text-foreground">Sistema financeiro 100% personalizado</span>
           </motion.div>
 
           <motion.div
@@ -344,8 +303,8 @@ export const SalesPage = () => {
             transition={{ delay: 0.3, type: "spring" }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 border border-secondary/30 mb-8 ml-2"
           >
-            <Users className="w-4 h-4 text-secondary" />
-            <span className="text-sm text-secondary">+2.500 pessoas já organizadas</span>
+            <Star className="w-4 h-4 text-secondary" />
+            <span className="text-sm text-secondary">Já são +2.500 pessoas organizadas</span>
           </motion.div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -396,40 +355,67 @@ export const SalesPage = () => {
       {/* 2. Prova Social Rápida */}
       <section className="py-12 px-6 border-y border-border/50 bg-card/30">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-3 gap-4 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <p className="text-2xl md:text-4xl font-bold text-gradient">R$ 50M+</p>
-              <p className="text-xs md:text-sm text-muted-foreground mt-1">já organizados</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-center"
-            >
-              <p className="text-2xl md:text-4xl font-bold text-gradient">2.500+</p>
-              <p className="text-xs md:text-sm text-muted-foreground mt-1">usuários ativos</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center gap-1">
-                <Star className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 fill-yellow-400" />
-                <p className="text-2xl md:text-4xl font-bold text-gradient">4.9</p>
-              </div>
-              <p className="text-xs md:text-sm text-muted-foreground mt-1">avaliação média</p>
-            </motion.div>
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 text-center">
+            <span className="text-lg md:text-xl font-semibold text-gradient">R$ 50M+ organizados</span>
+            <span className="text-muted-foreground">•</span>
+            <span className="text-lg md:text-xl font-semibold text-gradient">2.500+ usuários ativos</span>
+            <span className="text-muted-foreground">•</span>
+            <span className="text-lg md:text-xl font-semibold text-gradient flex items-center gap-1">
+              Nota <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 inline" /> 4.9
+            </span>
           </div>
+        </div>
+      </section>
+
+      {/* 2.5. Erros que te deixam no escuro */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Tentar se organizar sozinho <span className="text-gradient">pode te custar caro</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              A maioria das pessoas comete os mesmos erros — e continua no escuro, mesmo tentando se organizar.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-12">
+            {commonErrors.map((error, index) => (
+              <motion.div
+                key={error}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-3 p-4 rounded-2xl bg-red-500/5 border border-red-500/20"
+              >
+                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-muted-foreground">{error}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <p className="text-xl text-foreground mb-2 font-semibold">
+              O problema não é você.
+            </p>
+            <p className="text-xl text-foreground mb-6">
+              É o sistema que você tá tentando usar.
+            </p>
+            <p className="text-secondary font-medium">
+              Com a Athena, você tem organização automática direto no WhatsApp.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -545,14 +531,11 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              O que vem dentro da <span className="text-gradient">Athena</span>
+              Tudo que você precisa pra <span className="text-gradient">clareza total</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Tudo que você precisa para clareza financeira total
-            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -583,11 +566,8 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Como <span className="text-gradient">funciona</span>
+              Clareza em <span className="text-gradient">3 passos simples</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Simples assim. Em 3 passos você tem clareza total.
-            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
@@ -627,7 +607,7 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              A transformação que <span className="text-gradient">você merece</span>
+              De bagunça à <span className="text-gradient">clareza total</span>
             </h2>
           </motion.div>
 
@@ -643,7 +623,7 @@ export const SalesPage = () => {
                 <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center">
                   <X className="w-6 h-6 text-red-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-red-400">Sem Athena</h3>
+                <h3 className="text-xl font-semibold text-red-400">Antes</h3>
               </div>
               <ul className="space-y-4">
                 {beforeAfter.before.map((item, index) => (
@@ -699,36 +679,23 @@ export const SalesPage = () => {
       <section className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at center, hsl(188 100% 50% / 0.2), transparent 70%)" }} />
         
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-3xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
               O que muda na sua vida
             </h2>
+            <p className="text-xl text-muted-foreground">
+              Você começa a enxergar o que antes passava batido.
+            </p>
+            <p className="text-xl text-foreground mt-2">
+              Adeus surpresas. Bem-vinda tranquilidade.
+            </p>
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ boxShadow: "0 0 40px hsl(244 100% 63% / 0.3)" }}>
-                  <benefit.icon className="w-8 h-8 text-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -743,17 +710,14 @@ export const SalesPage = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 border border-secondary/30 mb-6">
               <Gift className="w-4 h-4 text-secondary" />
-              <span className="text-sm text-secondary font-semibold">BÔNUS EXCLUSIVOS</span>
+              <span className="text-sm text-secondary font-semibold">🎁 Bônus exclusivos — sem custo extra</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              E você ainda leva <span className="text-gradient">tudo isso</span>
+              Você ainda leva <span className="text-gradient">tudo isso:</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Sem custo adicional, incluído em todos os planos
-            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             {bonuses.map((bonus, index) => (
               <motion.div
                 key={bonus.title}
@@ -761,17 +725,12 @@ export const SalesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="athena-card group border-secondary/30 hover:border-secondary/50"
+                className="athena-card group border-secondary/30 hover:border-secondary/50 text-center"
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary/30 transition-colors">
-                    <bonus.icon className="w-6 h-6 text-secondary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1 text-foreground">{bonus.title}</h3>
-                    <p className="text-muted-foreground text-sm">{bonus.description}</p>
-                  </div>
+                <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-secondary/30 transition-colors">
+                  <bonus.icon className="w-6 h-6 text-secondary" />
                 </div>
+                <h3 className="font-semibold text-foreground">{bonus.title}</h3>
               </motion.div>
             ))}
           </div>
@@ -780,7 +739,7 @@ export const SalesPage = () => {
 
       {/* 9. Depoimentos */}
       <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -788,14 +747,11 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              O que dizem sobre a <span className="text-gradient">Athena</span>
+              Quem usa, <span className="text-gradient">recomenda:</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Histórias reais de transformação financeira
-            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="max-w-xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.name}
@@ -836,11 +792,8 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              A Athena é para <span className="text-gradient">você?</span>
+              A Athena é pra <span className="text-gradient">você</span> se:
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Se você se identifica com algum desses perfis, sim!
-            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -1012,16 +965,12 @@ export const SalesPage = () => {
             </div>
             
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Garantia de <span className="text-gradient">7 Dias</span>
+              7 dias de <span className="text-gradient">garantia total</span>
             </h2>
             
-            <p className="text-xl text-foreground mb-4">
-              100% do seu dinheiro de volta
-            </p>
-            
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Se dentro de 7 dias você não sentir que a Athena está transformando sua vida financeira, 
-              basta enviar uma mensagem e devolvemos cada centavo. Sem perguntas, sem burocracia.
+            <p className="text-muted-foreground max-w-xl mx-auto mb-4">
+              Se você não sentir transformação na sua vida financeira, é só pedir reembolso.
+              Sem perguntas, sem enrolação.
             </p>
             
             <div className="mt-6 flex items-center justify-center gap-2 text-secondary">
@@ -1042,11 +991,8 @@ export const SalesPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Perguntas Frequentes
+              Ainda com dúvidas?
             </h2>
-            <p className="text-muted-foreground">
-              Ainda tem dúvidas? Encontre as respostas aqui.
-            </p>
           </motion.div>
 
           <motion.div
@@ -1088,21 +1034,21 @@ export const SalesPage = () => {
             Cada mês sem clareza <span className="text-gradient">custa caro.</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Comece hoje — e veja sua vida financeira destravar em semanas.
+            Comece hoje — e veja sua vida financeira destravar.
           </p>
           
           {/* Mini Benefits Recap */}
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border">
-              <Eye className="w-4 h-4 text-secondary" />
+              <Check className="w-4 h-4 text-secondary" />
               <span className="text-sm text-foreground">Clareza total</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border">
-              <Zap className="w-4 h-4 text-secondary" />
+              <Check className="w-4 h-4 text-secondary" />
               <span className="text-sm text-foreground">100% automático</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border">
-              <Shield className="w-4 h-4 text-secondary" />
+              <Check className="w-4 h-4 text-secondary" />
               <span className="text-sm text-foreground">Garantia 7 dias</span>
             </div>
           </div>
@@ -1120,7 +1066,7 @@ export const SalesPage = () => {
           </motion.button>
           
           <p className="mt-6 text-sm text-muted-foreground">
-            Junte-se a +2.500 pessoas que já transformaram suas finanças
+            Junte-se às +2.500 pessoas que já transformaram suas finanças.
           </p>
         </motion.div>
       </section>
@@ -1179,7 +1125,7 @@ export const SalesPage = () => {
           {/* Bottom */}
           <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2024 Athena. Todos os direitos reservados.
+              © 2026 Athena. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Lock className="w-4 h-4" />
