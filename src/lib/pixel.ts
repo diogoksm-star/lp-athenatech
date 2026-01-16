@@ -27,3 +27,24 @@ export const trackCustomEvent = (eventName: string, params?: Record<string, unkn
     window.fbq('trackCustom', eventName, params);
   }
 };
+
+// Scroll milestones already fired (prevents duplicates)
+const scrollMilestonesFired = new Set<number>();
+
+/**
+ * Track scroll depth milestone
+ * @param percentage - Scroll percentage milestone (25, 50, 75, 100)
+ */
+export const trackScrollDepth = (percentage: number) => {
+  if (!scrollMilestonesFired.has(percentage)) {
+    scrollMilestonesFired.add(percentage);
+    trackCustomEvent('ScrollDepth', { percentage });
+  }
+};
+
+/**
+ * Reset scroll milestones (useful for SPA navigation)
+ */
+export const resetScrollMilestones = () => {
+  scrollMilestonesFired.clear();
+};
