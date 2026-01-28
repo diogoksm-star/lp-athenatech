@@ -13,6 +13,8 @@ import {
   Check,
   Shield,
   MessageCircle,
+  MessageSquare,
+  FileText,
   Smartphone,
   Send,
   Bot,
@@ -311,9 +313,39 @@ export const SalesPage = () => {
             Seu sistema financeiro inteligente{" "}
             <span className="text-gradient">está pronto.</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8">
+          <p className="text-xl text-muted-foreground mb-6">
             Clareza total, todos os dias, direto no WhatsApp.
           </p>
+
+          {/* Secondary Headline Block */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-8"
+          >
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-foreground">
+              Organizar as finanças com a Athena é tão fácil quanto{" "}
+              <span className="text-secondary">mandar uma mensagem no WhatsApp!</span>
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              A solução definitiva para controlar a sua vida financeira.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-sm text-foreground">
+                <Zap className="w-4 h-4 text-secondary" />
+                100% Automático
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-sm text-foreground">
+                <Brain className="w-4 h-4 text-secondary" />
+                Funciona com IA
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-sm text-foreground">
+                <Users className="w-4 h-4 text-secondary" />
+                +2.000 usuários
+              </span>
+            </div>
+          </motion.div>
 
           {/* Hero Mockup - Moved above button */}
           <motion.div
@@ -415,6 +447,47 @@ export const SalesPage = () => {
             </p>
             <p className="text-secondary font-medium">
               Com a Athena, você tem organização automática direto no WhatsApp.
+            </p>
+          </motion.div>
+
+          {/* Deixa eu adivinhar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">
+              Deixa eu adivinhar…
+            </h3>
+            <p className="text-xl text-muted-foreground mb-8">
+              Você já tentou de tudo e nada funcionou?
+            </p>
+            
+            <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-8">
+              {[
+                "Planilhas prontas",
+                "Cadernos velhos",
+                "Grupos do WhatsApp",
+                "Apps de Finanças"
+              ].map((item, index) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center gap-2 p-3 rounded-xl bg-red-500/5 border border-red-500/20"
+                >
+                  <X className="w-4 h-4 text-red-400 flex-shrink-0" />
+                  <span className="text-muted-foreground text-sm">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-lg text-foreground font-semibold">
+              O problema não é você.{" "}
+              <span className="text-secondary">Esses sistemas não funcionam pra ninguém!</span>
             </p>
           </motion.div>
         </div>
@@ -715,7 +788,7 @@ export const SalesPage = () => {
         </div>
       </section>
 
-      {/* 8. Bônus Inclusos */}
+      {/* 8. Funcionalidades da Athena */}
       <section className="py-20 px-6 bg-card/30">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -724,29 +797,52 @@ export const SalesPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 border border-secondary/30 mb-6">
-              <Gift className="w-4 h-4 text-secondary" />
-              <span className="text-sm text-secondary font-semibold">🎁 Bônus exclusivos — sem custo extra</span>
-            </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Você ainda leva <span className="text-gradient">tudo isso:</span>
+              Essas são todas as <span className="text-gradient">funcionalidades da Athena:</span>
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            {bonuses.map((bonus, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: MessageSquare,
+                title: "Registro direto no WhatsApp",
+                description: "Envie uma mensagem, um áudio ou até uma foto da nota fiscal, a Athena registra automaticamente."
+              },
+              {
+                icon: LayoutDashboard,
+                title: "Dashboard direto ao ponto",
+                description: "Veja todas as principais informações de forma rápida e tenha total clareza de como está suas finanças."
+              },
+              {
+                icon: FileText,
+                title: "Relatório mensal",
+                description: "A Athena te envia automaticamente os relatórios e mapeia o quão perto você está dos seus objetivos."
+              },
+              {
+                icon: TrendingUp,
+                title: "Organização de investimentos",
+                description: "Acesse uma aba separada e veja somente como está a situação atual dos seus investimentos e ativos."
+              },
+              {
+                icon: Target,
+                title: "Plano de metas financeiras",
+                description: "A Athena traça um plano para te ajudar a chegar nos seus maiores objetivos financeiros."
+              }
+            ].map((feature, index) => (
               <motion.div
-                key={bonus.title}
+                key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="athena-card group border-secondary/30 hover:border-secondary/50 text-center"
+                className="athena-card group hover:border-primary/50 transition-colors"
               >
-                <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-secondary/30 transition-colors">
-                  <bonus.icon className="w-6 h-6 text-secondary" />
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-secondary/30 transition-colors">
+                  <feature.icon className="w-7 h-7 text-secondary" />
                 </div>
-                <h3 className="font-semibold text-foreground">{bonus.title}</h3>
+                <h3 className="text-lg font-semibold mb-2 text-foreground">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.description}</p>
               </motion.div>
             ))}
           </div>
