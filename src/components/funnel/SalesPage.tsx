@@ -109,28 +109,6 @@ const testimonials = [
   },
 ];
 
-const targetAudience = [
-  {
-    icon: Briefcase,
-    title: "Autônomos e Freelancers",
-    description: "Que querem organização automática",
-  },
-  {
-    icon: Home,
-    title: "Famílias",
-    description: "Que precisam de controle sem stress",
-  },
-  {
-    icon: Users,
-    title: "MEIs",
-    description: "Que querem separar pessoal e empresa",
-  },
-  {
-    icon: GraduationCap,
-    title: "Quem quer investir",
-    description: "Mas nunca sabe quanto sobra",
-  },
-];
 
 const faqs = [
   {
@@ -188,25 +166,6 @@ const howItWorks = [
   },
 ];
 
-const beforeAfter = {
-  before: [
-    "Surpresas no fim do mês",
-    "Contas esquecidas",
-    "Dinheiro \"sumido\"",
-  ],
-  after: [
-    "Cada centavo no radar",
-    "Alertas antes do vencimento",
-    "Visão completa das suas finanças",
-  ],
-};
-
-const commonErrors = [
-  "Planilhas que duram só uma semana",
-  "Caderno de anotações que vira bagunça",
-  "Gastos esquecidos ou fora do controle",
-  "Chegar no fim do mês sem saber pra onde foi o dinheiro",
-];
 
 export const SalesPage = () => {
   const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
@@ -309,13 +268,6 @@ export const SalesPage = () => {
             <span className="text-sm text-secondary">Já são +2.500 pessoas organizadas</span>
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Seu sistema financeiro inteligente{" "}
-            <span className="text-gradient">está pronto.</span>
-          </h1>
-          <p className="text-xl text-muted-foreground mb-6">
-            Clareza total, todos os dias, direto no WhatsApp.
-          </p>
 
           {/* Secondary Headline Block */}
           <motion.div
@@ -400,98 +352,6 @@ export const SalesPage = () => {
         </div>
       </section>
 
-      {/* 2.5. Erros que te deixam no escuro */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Tentar se organizar sozinho <span className="text-gradient">pode te custar caro</span>
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              A maioria das pessoas comete os mesmos erros — e continua no escuro, mesmo tentando se organizar.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-4 mb-12">
-            {commonErrors.map((error, index) => (
-              <motion.div
-                key={error}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex items-center gap-3 p-4 rounded-2xl bg-red-500/5 border border-red-500/20"
-              >
-                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <span className="text-muted-foreground">{error}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <p className="text-xl text-foreground mb-2 font-semibold">
-              O problema não é você.
-            </p>
-            <p className="text-xl text-foreground mb-6">
-              É o sistema que você tá tentando usar.
-            </p>
-            <p className="text-secondary font-medium">
-              Com a Athena, você tem organização automática direto no WhatsApp.
-            </p>
-          </motion.div>
-
-          {/* Deixa eu adivinhar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">
-              Deixa eu adivinhar…
-            </h3>
-            <p className="text-xl text-muted-foreground mb-8">
-              Você já tentou de tudo e nada funcionou?
-            </p>
-            
-            <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-8">
-              {[
-                "Planilhas prontas",
-                "Cadernos velhos",
-                "Grupos do WhatsApp",
-                "Apps de Finanças"
-              ].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-2 p-3 rounded-xl bg-red-500/5 border border-red-500/20"
-                >
-                  <X className="w-4 h-4 text-red-400 flex-shrink-0" />
-                  <span className="text-muted-foreground text-sm">{item}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <p className="text-lg text-foreground font-semibold">
-              O problema não é você.{" "}
-              <span className="text-secondary">Esses sistemas não funcionam pra ninguém!</span>
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
       {/* 3. Mockup do Produto */}
       <section className="py-20 px-6 relative overflow-hidden">
@@ -686,83 +546,6 @@ export const SalesPage = () => {
         </div>
       </section>
 
-      {/* 6. Antes vs Depois */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              De bagunça à <span className="text-gradient">clareza total</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Before */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="athena-card border-red-500/30 bg-red-500/5"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center">
-                  <X className="w-6 h-6 text-red-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-red-400">Antes</h3>
-              </div>
-              <ul className="space-y-4">
-                {beforeAfter.before.map((item, index) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* After */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="athena-card border-green-500/30 bg-green-500/5"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
-                  <Check className="w-6 h-6 text-green-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-green-400">Com Athena</h3>
-              </div>
-              <ul className="space-y-4">
-                {beforeAfter.after.map((item, index) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                    <span className="text-foreground">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* 7. Benefits Section */}
       <section className="py-20 px-6 relative overflow-hidden">
@@ -894,42 +677,6 @@ export const SalesPage = () => {
         </div>
       </section>
 
-      {/* 10. Para Quem é a Athena */}
-      <section className="py-20 px-6 bg-card/30">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              A Athena é pra <span className="text-gradient">você</span> se:
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {targetAudience.map((audience, index) => (
-              <motion.div
-                key={audience.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="athena-card flex items-start gap-4"
-              >
-                <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0">
-                  <audience.icon className="w-7 h-7 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2 text-foreground">{audience.title}</h3>
-                  <p className="text-muted-foreground">{audience.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 11. Pricing Section - Aprimorado */}
       <section id="pricing" ref={pricingRef} className="py-20 px-6">
