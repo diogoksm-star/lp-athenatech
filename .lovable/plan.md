@@ -1,29 +1,16 @@
 
 
-## Plano: Substituir Badge por Logo e Aumentar Headline
+## Plano: Animação Fade-in na Logo e Remoção do Badge +2500
 
 ### Resumo das Alterações
 
-Vou fazer duas alterações no Hero Section do arquivo `src/components/funnel/SalesPage.tsx`:
+Vou fazer as seguintes alterações no Hero Section do arquivo `src/components/funnel/SalesPage.tsx`:
 
 ---
 
-### 1. Substituir Badge "Sistema financeiro 100% personalizado" pela Logo Athena
+### 1. Adicionar Animação Fade-in na Logo
 
-**Localização atual (linhas 251-259):**
-```tsx
-<motion.div
-  initial={{ scale: 0 }}
-  animate={{ scale: 1 }}
-  transition={{ delay: 0.2, type: "spring" }}
-  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-4"
->
-  <BadgeCheck className="w-4 h-4 text-secondary" />
-  <span className="text-sm text-foreground">Sistema financeiro 100% personalizado</span>
-</motion.div>
-```
-
-**Substituir por:**
+**Localização atual (linhas 252-263):**
 ```tsx
 <motion.div
   initial={{ scale: 0 }}
@@ -39,33 +26,59 @@ Vou fazer duas alterações no Hero Section do arquivo `src/components/funnel/Sa
 </motion.div>
 ```
 
-**Ações adicionais:**
-- Copiar o arquivo `user-uploads://logo.svg` para `src/assets/logo.svg`
-- Adicionar import: `import athenaLogo from "@/assets/logo.svg";`
+**Alterar para:**
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+  className="mb-8"
+>
+  <img 
+    src={athenaLogo} 
+    alt="Athena" 
+    className="h-12 md:h-16 w-auto mx-auto"
+  />
+</motion.div>
+```
+
+A animação mudará de:
+- **Antes:** Scale (aparece como "pop")
+- **Depois:** Fade-in suave com leve movimento de cima para baixo
 
 ---
 
-### 2. Aumentar Fonte da Headline Principal
+### 2. Remover Badge "+2.500 pessoas organizadas"
 
-**Localização atual (linha 279):**
+**Remover completamente (linhas 265-273):**
 ```tsx
-<h2 className="text-2xl md:text-3xl font-semibold mb-3 text-foreground">
+<motion.div
+  initial={{ scale: 0 }}
+  animate={{ scale: 1 }}
+  transition={{ delay: 0.3, type: "spring" }}
+  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 border border-secondary/30 mb-8 ml-2"
+>
+  <Star className="w-4 h-4 text-secondary" />
+  <span className="text-sm text-secondary">Já são +2.500 pessoas organizadas</span>
+</motion.div>
 ```
 
-**Alterar para:**
-```tsx
-<h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground leading-tight">
-```
+---
 
-O tamanho aumentará de:
-- Mobile: `text-2xl` (24px) → `text-3xl` (30px)
-- Desktop: `text-3xl` (30px) → `text-5xl` (48px)
+### Estrutura Final do Hero
+
+```text
+Hero Section:
+├─ Logo Athena (com fade-in suave)
+├─ Headline "Organizar as finanças com a Athena..."
+├─ Subheadline "A solução definitiva..."
+├─ 3 Badges (100% Automático, Funciona com IA, +2.000 usuários)
+├─ Mockup
+└─ CTA Button
+```
 
 ---
 
 ### Arquivo Modificado
 - `src/components/funnel/SalesPage.tsx`
-
-### Arquivos Copiados
-- `user-uploads://logo.svg` → `src/assets/logo.svg`
 
