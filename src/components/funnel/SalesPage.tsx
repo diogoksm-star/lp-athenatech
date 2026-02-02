@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import athenaLogo from "@/assets/logo.svg";
 import {
   Sparkles,
   LayoutDashboard,
@@ -252,10 +253,13 @@ export const SalesPage = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-4"
+            className="mb-6"
           >
-            <BadgeCheck className="w-4 h-4 text-secondary" />
-            <span className="text-sm text-foreground">Sistema financeiro 100% personalizado</span>
+            <img 
+              src={athenaLogo} 
+              alt="Athena" 
+              className="h-12 md:h-16 w-auto mx-auto"
+            />
           </motion.div>
 
           <motion.div
@@ -276,7 +280,7 @@ export const SalesPage = () => {
             transition={{ delay: 0.4 }}
             className="mb-8"
           >
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-foreground">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground leading-tight">
               Organizar as finanças com a Athena é tão fácil quanto{" "}
               <span className="text-secondary">mandar uma mensagem no WhatsApp!</span>
             </h2>
