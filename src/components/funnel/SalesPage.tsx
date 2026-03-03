@@ -242,7 +242,7 @@ export const SalesPage = () => {
       {/* 1. Hero Section - Aprimorado */}
       <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] opacity-30 pointer-events-none" style={{ background: "radial-gradient(circle, hsl(244 100% 63% / 0.4), transparent 60%)" }} />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -255,9 +255,9 @@ export const SalesPage = () => {
             transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
             className="mb-8"
           >
-            <img 
-              src={athenaLogo} 
-              alt="Athena" 
+            <img
+              src={athenaLogo}
+              alt="Athena"
               className="h-12 md:h-16 w-auto mx-auto"
             />
           </motion.div>
@@ -300,11 +300,14 @@ export const SalesPage = () => {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="mb-10 w-full max-w-4xl mx-auto"
           >
-            <img 
-              src={macbookMockup} 
-              alt="Athena - Sistema financeiro no MacBook e celulares" 
+            <img
+              src={macbookMockup}
+              alt="Athena - Sistema financeiro no MacBook e celulares"
               className="w-full h-auto drop-shadow-2xl"
               style={{ filter: "drop-shadow(0 25px 50px hsl(244 100% 63% / 0.3))" }}
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
             />
           </motion.div>
 
@@ -350,7 +353,7 @@ export const SalesPage = () => {
       {/* 3. Mockup do Produto */}
       <section className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ background: "radial-gradient(ellipse at top, hsl(188 100% 50% / 0.3), transparent 60%)" }} />
-        
+
         <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -378,18 +381,19 @@ export const SalesPage = () => {
               <div className="w-72 md:w-80 bg-card rounded-[3rem] p-3 border-4 border-border shadow-2xl" style={{ boxShadow: "0 25px 60px -12px hsl(244 100% 63% / 0.4)" }}>
                 {/* Phone Screen with GIF */}
                 <div className="bg-background rounded-[2.5rem] overflow-hidden min-h-[500px]">
-                  <video 
-                    autoPlay 
-                    loop 
-                    muted 
+                  <video
+                    autoPlay
+                    loop
+                    muted
                     playsInline
+                    preload="none"
                     className="w-full h-full object-cover rounded-[2.5rem]"
                   >
                     <source src="https://i.imgur.com/5Ed7Vi9.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
-              
+
               {/* Floating Cards */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -466,7 +470,7 @@ export const SalesPage = () => {
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Connection Line */}
             <div className="hidden md:block absolute top-16 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary opacity-30" />
-            
+
             {/* Step 1 */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -544,7 +548,7 @@ export const SalesPage = () => {
       {/* 7. Benefits Section */}
       <section className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at center, hsl(188 100% 50% / 0.2), transparent 70%)" }} />
-        
+
         <div className="max-w-3xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -687,7 +691,7 @@ export const SalesPage = () => {
             <p className="text-muted-foreground text-lg mb-6">
               Investimento que se paga no primeiro mês
             </p>
-            
+
             {/* Urgency Timer */}
             <motion.div
               initial={{ scale: 0.9 }}
@@ -730,16 +734,17 @@ export const SalesPage = () => {
                   </li>
                 ))}
               </ul>
-              <a 
+              <a
                 href="https://pay.hotmart.com/W102950871U?off=6jeru4fn&bid=1765464759738"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackEvent('InitiateCheckout', { 
-                  content_name: 'Plano Mensal', 
-                  value: 34.90, 
-                  currency: 'BRL' 
+                onClick={() => trackEvent('InitiateCheckout', {
+                  content_name: 'Plano Mensal',
+                  value: 34.90,
+                  currency: 'BRL'
                 })}
                 className="block w-full py-4 rounded-2xl border-2 border-primary text-foreground font-semibold hover:bg-primary/10 transition-colors text-center"
+                style={{ position: 'relative', zIndex: 20, pointerEvents: 'auto' }}
               >
                 Começar agora →
               </a>
@@ -784,16 +789,17 @@ export const SalesPage = () => {
                   <span>Todos os bônus inclusos</span>
                 </li>
               </ul>
-              <a 
+              <a
                 href="https://pay.hotmart.com/W102950871U?off=tglbzob2&bid=1764979505775"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackEvent('InitiateCheckout', { 
-                  content_name: 'Plano Anual', 
-                  value: 287.00, 
-                  currency: 'BRL' 
+                onClick={() => trackEvent('InitiateCheckout', {
+                  content_name: 'Plano Anual',
+                  value: 287.00,
+                  currency: 'BRL'
                 })}
                 className="athena-button w-full text-foreground block text-center"
+                style={{ position: 'relative', zIndex: 20, pointerEvents: 'auto' }}
               >
                 Garantir Plano Anual →
               </a>
@@ -812,20 +818,20 @@ export const SalesPage = () => {
             className="athena-card text-center border-secondary/30 relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
-            
+
             <div className="w-24 h-24 rounded-full bg-gradient-to-br from-secondary to-primary flex items-center justify-center mx-auto mb-6" style={{ boxShadow: "0 0 60px hsl(188 100% 50% / 0.4)" }}>
               <Shield className="w-12 h-12 text-foreground" />
             </div>
-            
+
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               7 dias de <span className="text-gradient">garantia total</span>
             </h2>
-            
+
             <p className="text-muted-foreground max-w-xl mx-auto mb-4">
               Se você não sentir transformação na sua vida financeira, é só pedir reembolso.
               Sem perguntas, sem enrolação.
             </p>
-            
+
             <div className="mt-6 flex items-center justify-center gap-2 text-secondary">
               <Lock className="w-5 h-5" />
               <span className="font-semibold">Compra 100% segura</span>
@@ -876,7 +882,7 @@ export const SalesPage = () => {
       {/* 14. CTA Final - Aprimorado */}
       <section className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at bottom, hsl(244 100% 63% / 0.3), transparent 70%)" }} />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -889,7 +895,7 @@ export const SalesPage = () => {
           <p className="text-xl text-muted-foreground mb-8">
             Comece hoje — e veja sua vida financeira destravar.
           </p>
-          
+
           {/* Mini Benefits Recap */}
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border">
@@ -905,7 +911,7 @@ export const SalesPage = () => {
               <span className="text-sm text-foreground">Garantia 7 dias</span>
             </div>
           </div>
-          
+
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -917,7 +923,7 @@ export const SalesPage = () => {
           >
             Quero Clareza Financeira →
           </motion.button>
-          
+
           <p className="mt-6 text-sm text-muted-foreground">
             Junte-se às +2.500 pessoas que já transformaram suas finanças.
           </p>
@@ -931,13 +937,10 @@ export const SalesPage = () => {
             {/* Logo & Description */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-foreground" />
-                </div>
-                <span className="text-xl font-bold text-foreground">Athena</span>
+                <img src={athenaLogo} alt="Athena" className="h-8 w-auto" />
               </div>
               <p className="text-muted-foreground text-sm mb-4">
-                Organização e clareza financeira automatizada via WhatsApp. 
+                Organização e clareza financeira automatizada via WhatsApp.
                 Transforme sua relação com o dinheiro de forma simples e inteligente.
               </p>
               <div className="flex gap-4">

@@ -39,12 +39,12 @@
     --athena-purple: 244 100% 63%;
     --athena-cyan: 188 100% 50%;
     --athena-glow: 244 100% 70%;
-    
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(244 100% 63%), hsl(188 100% 50%));
     --gradient-card: linear-gradient(180deg, hsl(252 60% 14%), hsl(252 60% 10%));
     --gradient-glow: radial-gradient(circle at 50% 0%, hsl(244 100% 63% / 0.3), transparent 50%);
-    
+
     /* Shadows */
     --shadow-glow: 0 0 60px hsl(244 100% 63% / 0.4);
     --shadow-cyan: 0 0 40px hsl(188 100% 50% / 0.3);
@@ -143,8 +143,20 @@
   }
 
   .pricing-card {
-    @apply rounded-3xl p-8 border border-border relative overflow-hidden;
+    @apply rounded-3xl p-8 border border-border relative;
     background: var(--gradient-card);
+  }
+
+  .pricing-card>* {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-card a,
+  .pricing-card button {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
   }
 
   .pricing-card.featured {
@@ -156,6 +168,7 @@
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 0;
     background: var(--gradient-glow);
     pointer-events: none;
   }
