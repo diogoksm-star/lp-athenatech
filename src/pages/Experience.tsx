@@ -11,13 +11,14 @@ import {
   Phone,
   Video,
   MoreVertical,
-  Send,
   Smile,
   Paperclip,
   Mic,
   PieChart,
   Wallet,
   BarChart3,
+  Play,
+  Pause,
 } from "lucide-react";
 
 // ─── WhatsApp Chat Data ──────────────────────────────────────────────────────
@@ -117,32 +118,91 @@ const categoryData = [
 // ─── WhatsApp Phase ──────────────────────────────────────────────────────────
 
 const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
+  const [started, setStarted] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [isTyping, setIsTyping] = useState(false);
   const [typingFrom, setTypingFrom] = useState<"user" | "athena">("user");
   const chatAreaRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const [showDashboardHint, setShowDashboardHint] = useState(false);
-  const audioPlayedRef = useRef(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const typeSoundRef = useRef<HTMLAudioElement | null>(null);
+  const notifSoundRef = useRef<HTMLAudioElement | null>(null);
 
-  // Auto-play audio when the audio message becomes visible
+  // Audio playback state for chat message
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Index of the audio message in chatScript
+  const audioMsgIndex = chatScript.findIndex((m) => m.audio);
+
+  // Pre-load all audio assets on mount
   useEffect(() => {
-    if (audioPlayedRef.current) return;
-    const audioMsg = chatScript.find((m, i) => m.audio && i < visibleMessages);
-    if (audioMsg?.audio) {
-      audioPlayedRef.current = true;
-      const audio = new Audio(audioMsg.audio);
-      audio.volume = 0.7;
-      audio.play().catch(() => {});
+    const audioSrc = chatScript.find((m) => m.audio)?.audio;
+    if (audioSrc) {
+      const audio = new Audio(audioSrc);
+      audio.volume = 1;
+      audio.preload = "auto";
+      audioRef.current = audio;
+      audio.addEventListener("ended", () => setIsPlaying(false));
     }
-  }, [visibleMessages]);
+
+    const typeSound = new Audio("/assets/whatsapp-type.mp3");
+    typeSound.volume = 0.5;
+    typeSound.preload = "auto";
+    typeSoundRef.current = typeSound;
+
+    const notifSound = new Audio("/assets/whatsapp-notification.mp3");
+    notifSound.volume = 0.6;
+    notifSound.preload = "auto";
+    notifSoundRef.current = notifSound;
+  }, []);
+
+  // Play notification sound when Athena responds
+  const playNotifSound = () => {
+    if (notifSoundRef.current) {
+      notifSoundRef.current.currentTime = 0;
+      notifSoundRef.current.play().catch(() => {});
+    }
+  };
+
+  // Play type sound during user typing
+  const typeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const startTypingSound = () => {
+    if (!typeSoundRef.current) return;
+    typeSoundRef.current.currentTime = 0;
+    typeSoundRef.current.play().catch(() => {});
+    typeIntervalRef.current = setInterval(() => {
+      if (typeSoundRef.current) {
+        typeSoundRef.current.currentTime = 0;
+        typeSoundRef.current.play().catch(() => {});
+      }
+    }, 400);
+  };
+  const stopTypingSound = () => {
+    if (typeIntervalRef.current) {
+      clearInterval(typeIntervalRef.current);
+      typeIntervalRef.current = null;
+    }
+  };
+
+  // Toggle play/pause on audio message
+  const toggleAudioPlayback = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(() => {});
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
     // Force scroll to bottom of chat area after animation completes
     const el = chatAreaRef.current;
     if (el) {
       const scroll = () => { el.scrollTop = el.scrollHeight; };
-      // Scroll immediately and again after animation finishes
       scroll();
       const t1 = setTimeout(scroll, 100);
       const t2 = setTimeout(scroll, 350);
@@ -150,47 +210,81 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
     }
   }, [visibleMessages, isTyping, showDashboardHint]);
 
+  // Unlock all audio on "Iniciar conversa" click and start the full flow
+  const handleStart = () => {
+    // Unlock audio context with user gesture
+    [audioRef, typeSoundRef, notifSoundRef].forEach((ref) => {
+      if (ref.current) {
+        ref.current.play().then(() => {
+          ref.current!.pause();
+          ref.current!.currentTime = 0;
+        }).catch(() => {});
+      }
+    });
+    setStarted(true);
+  };
+
+  // Run the entire chat flow after started
   useEffect(() => {
+    if (!started) return;
+
     const timeouts: ReturnType<typeof setTimeout>[] = [];
-    let accumulated = 800; // initial delay
+    let accumulated = 800;
 
     chatScript.forEach((msg, i) => {
-      // Check if previous message was audio (this msg is the response after audio)
-      const prevMsg = i > 0 ? chatScript[i - 1] : null;
-      const isResponseToAudio = prevMsg?.audio;
+      const isUser = msg.from === "user";
+      const isAudioMsg = !!msg.audio;
 
-      // Show typing indicator (skip for audio responses — Athena is "listening")
-      const typingStart = accumulated;
-      if (!isResponseToAudio) {
+      // Start typing (2s) + type sound for user (skip for audio msg)
+      if (!isAudioMsg) {
         timeouts.push(
           setTimeout(() => {
             setTypingFrom(msg.from);
             setIsTyping(true);
-          }, typingStart)
+            if (isUser) startTypingSound();
+          }, accumulated)
         );
+        accumulated += 2000;
+
+        // Stop typing + 1s pause
+        timeouts.push(
+          setTimeout(() => {
+            if (isUser) stopTypingSound();
+            setIsTyping(false);
+          }, accumulated)
+        );
+        accumulated += 1000;
       }
 
       // Show message
-      accumulated += msg.delay;
-
-      // For audio responses, show typing briefly before the message appears
-      if (isResponseToAudio) {
-        timeouts.push(
-          setTimeout(() => {
-            setTypingFrom(msg.from);
-            setIsTyping(true);
-          }, accumulated - 2000)
-        );
-      }
-
       timeouts.push(
         setTimeout(() => {
-          setIsTyping(false);
           setVisibleMessages(i + 1);
+          if (!isUser && !isAudioMsg) playNotifSound();
+
+          // If this is the audio message, auto-play it
+          if (isAudioMsg && audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play().catch(() => {});
+            setIsPlaying(true);
+          }
         }, accumulated)
       );
 
-      accumulated += 400; // small gap between messages
+      // If audio message, wait for audio duration before next message
+      if (isAudioMsg) {
+        accumulated += 9000; // audio duration + buffer
+
+        // Show Athena typing 2s before response
+        timeouts.push(
+          setTimeout(() => {
+            setTypingFrom("athena");
+            setIsTyping(true);
+          }, accumulated - 2000)
+        );
+      } else {
+        accumulated += 500;
+      }
     });
 
     // Show dashboard hint after all messages
@@ -201,10 +295,10 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
     );
 
     return () => timeouts.forEach(clearTimeout);
-  }, []);
+  }, [started]);
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#0b141a]">
+    <div className="h-[100dvh] flex flex-col bg-[#0b141a] relative">
       {/* WhatsApp Header */}
       <div className="flex items-center gap-3 px-3 py-2 bg-[#1f2c34]">
         <ChevronLeft className="w-6 h-6 text-[#aebac1]" />
@@ -263,16 +357,26 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
                   />
                 )}
                 {msg.audio && (
-                  <div className="flex items-center gap-2 py-1 mb-1">
+                  <div
+                    className="flex items-center gap-2 py-1 mb-1 cursor-pointer"
+                    onClick={toggleAudioPlayback}
+                  >
                     <div className="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center flex-shrink-0">
-                      <Mic className="w-4 h-4 text-white" />
+                      {isPlaying ? (
+                        <Pause className="w-4 h-4 text-white" />
+                      ) : (
+                        <Play className="w-4 h-4 text-white ml-0.5" />
+                      )}
                     </div>
                     <div className="flex-1 flex items-center gap-1">
                       {[4,10,7,14,9,12,6,15,8,11,5,13,7,10,14,6,12,8,11,5].map((h, k) => (
                         <div
                           key={k}
-                          className="w-[3px] rounded-full bg-[#8696a0]"
-                          style={{ height: `${h}px` }}
+                          className="w-[3px] rounded-full transition-colors duration-200"
+                          style={{
+                            height: `${h}px`,
+                            backgroundColor: isPlaying ? "#00a884" : "#8696a0",
+                          }}
                         />
                       ))}
                     </div>
@@ -348,16 +452,54 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
       </div>
 
       {/* Input bar */}
-      <div className="flex items-center gap-2 px-2 py-2 bg-[#1f2c34]">
-        <Smile className="w-6 h-6 text-[#8696a0]" />
-        <div className="flex-1 bg-[#2a3942] rounded-full px-4 py-2 flex items-center">
-          <Paperclip className="w-5 h-5 text-[#8696a0] mr-2 rotate-45" />
-          <span className="text-[#8696a0] text-[15px]">Mensagem</span>
+      {!started ? (
+        <div className="flex items-center gap-2 px-2 py-2 bg-[#1f2c34]">
+          <Smile className="w-6 h-6 text-[#8696a0]" />
+          <div className="flex-1 bg-[#2a3942] rounded-full px-4 py-2 flex items-center">
+            <Paperclip className="w-5 h-5 text-[#8696a0] mr-2 rotate-45" />
+            <span className="text-[#8696a0] text-[15px]">Mensagem</span>
+          </div>
+          <div className="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center">
+            <Mic className="w-5 h-5 text-white" />
+            </div>
         </div>
-        <div className="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center">
-          <Mic className="w-5 h-5 text-white" />
+      ) : (
+        <div className="flex items-center gap-2 px-2 py-2 bg-[#1f2c34]">
+          <Smile className="w-6 h-6 text-[#8696a0]" />
+          <div className="flex-1 bg-[#2a3942] rounded-full px-4 py-2 flex items-center">
+            <Paperclip className="w-5 h-5 text-[#8696a0] mr-2 rotate-45" />
+            <span className="text-[#8696a0] text-[15px]">Mensagem</span>
+          </div>
+          <div className="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center">
+            <Mic className="w-5 h-5 text-white" />
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Start button overlay */}
+      <AnimatePresence>
+        {!started && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 flex items-center justify-center bg-[#0b141a]/80 z-10"
+          >
+            <motion.button
+              onClick={handleStart}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold text-base shadow-lg"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.4 }}
+            >
+              <Play className="w-5 h-5" />
+              Iniciar conversa
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
