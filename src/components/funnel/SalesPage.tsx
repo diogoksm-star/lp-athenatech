@@ -34,7 +34,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { trackEvent, trackCustomEvent, trackScrollDepth } from "@/lib/pixel";
+import { trackEvent, trackCustomEvent, trackScrollDepth, trackGA4, clarityTag } from "@/lib/pixel";
 
 // ─── Static Data ──────────────────────────────────────────────────────────────
 
@@ -145,6 +145,8 @@ export const SalesPage = () => {
               value: 287.0,
               currency: "BRL",
             });
+            trackGA4("view_pricing", { section: "pricing" });
+            clarityTag("ViewPricing");
           }
         });
       },
@@ -257,6 +259,8 @@ export const SalesPage = () => {
             whileTap={{ scale: 0.98 }}
             onClick={() => {
               trackCustomEvent("ClickCTA", { location: "hero" });
+              trackGA4("click_cta", { location: "hero" });
+              clarityTag("ClickCTA_Hero");
               scrollToPlans();
             }}
             className="athena-button text-foreground text-xl px-12 py-5"
@@ -667,6 +671,8 @@ export const SalesPage = () => {
                     value: 34.9,
                     currency: "BRL",
                   });
+                  trackGA4("begin_checkout", { plan: "mensal", value: 34.9 });
+                  clarityTag("Checkout_Mensal");
                   window.location.href =
                     "https://pay.hotmart.com/W102950871U?off=6jeru4fn&bid=1765464759738";
                 }}
@@ -719,6 +725,8 @@ export const SalesPage = () => {
                     value: 287.0,
                     currency: "BRL",
                   });
+                  trackGA4("begin_checkout", { plan: "anual", value: 287.0 });
+                  clarityTag("Checkout_Anual");
                   window.location.href =
                     "https://pay.hotmart.com/W102950871U?off=tglbzob2&bid=1764979505775";
                 }}
@@ -842,6 +850,8 @@ export const SalesPage = () => {
             whileTap={{ scale: 0.98 }}
             onClick={() => {
               trackCustomEvent("ClickCTA", { location: "final" });
+              trackGA4("click_cta", { location: "final" });
+              clarityTag("ClickCTA_Final");
               scrollToPlans();
             }}
             className="athena-button text-foreground text-xl px-16 py-6"

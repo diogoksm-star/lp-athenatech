@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import athenaLogo from "@/assets/logo.svg";
+import { trackFunnelStep } from "@/lib/pixel";
 import {
   ArrowRight,
   Check,
@@ -222,6 +223,7 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
       }
     });
     setStarted(true);
+    trackFunnelStep('ChatStarted');
   };
 
   // Run the entire chat flow after started
@@ -262,11 +264,15 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
           setVisibleMessages(i + 1);
           if (!isUser && !isAudioMsg) playNotifSound();
 
+          // Track each message milestone
+          trackFunnelStep('ChatMessage', { message_index: i, from: msg.from, has_audio: isAudioMsg, has_image: !!msg.image });
+
           // If this is the audio message, auto-play it
           if (isAudioMsg && audioRef.current) {
             audioRef.current.currentTime = 0;
             audioRef.current.play().catch(() => {});
             setIsPlaying(true);
+            trackFunnelStep('AudioPlayed');
           }
         }, accumulated)
       );
@@ -291,6 +297,7 @@ const WhatsAppPhase = ({ onComplete }: { onComplete: () => void }) => {
     timeouts.push(
       setTimeout(() => {
         setShowDashboardHint(true);
+        trackFunnelStep('ChatCompleted');
       }, accumulated + 1500)
     );
 
@@ -514,9 +521,13 @@ const DashboardPhase = ({ onComplete }: { onComplete: () => void }) => {
   const [animatedExpenses, setAnimatedExpenses] = useState(0);
 
   useEffect(() => {
+    trackFunnelStep('DashboardViewed');
     setTimeout(() => setShowContent(true), 400);
     setTimeout(() => setShowTransactions(true), 1200);
-    setTimeout(() => setShowCTA(true), 3000);
+    setTimeout(() => {
+      setShowCTA(true);
+      trackFunnelStep('CTAVisible');
+    }, 3000);
   }, []);
 
   // Animate numbers
@@ -738,10 +749,12 @@ const Experience = () => {
   const navigate = useNavigate();
 
   const handleWhatsAppComplete = () => {
+    trackFunnelStep('ClickedViewDashboard');
     setPhase("dashboard");
   };
 
   const handleDashboardComplete = () => {
+    trackFunnelStep('ClickedCTA_Offer');
     navigate("/oferta");
   };
 

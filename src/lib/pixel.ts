@@ -1,50 +1,68 @@
-// Meta Pixel tracking utilities
+// Unified tracking: Meta Pixel + GA4 + Clarity
 
 declare global {
   interface Window {
     fbq: (...args: unknown[]) => void;
+    gtag: (...args: unknown[]) => void;
+    clarity: (...args: unknown[]) => void;
   }
 }
 
-/**
- * Track a standard Meta Pixel event
- * @param eventName - Standard event name (e.g., 'PageView', 'InitiateCheckout', 'Purchase')
- * @param params - Optional event parameters
- */
+// ─── Meta Pixel ─────────────────────────────────────────────────────────────
+
 export const trackEvent = (eventName: string, params?: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, params);
   }
 };
 
-/**
- * Track a custom Meta Pixel event
- * @param eventName - Custom event name
- * @param params - Optional event parameters
- */
 export const trackCustomEvent = (eventName: string, params?: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('trackCustom', eventName, params);
   }
 };
 
-// Scroll milestones already fired (prevents duplicates)
-const scrollMilestonesFired = new Set<number>();
+// ─── GA4 ────────────────────────────────────────────────────────────────────
 
-/**
- * Track scroll depth milestone
- * @param percentage - Scroll percentage milestone (25, 50, 75, 100)
- */
-export const trackScrollDepth = (percentage: number) => {
-  if (!scrollMilestonesFired.has(percentage)) {
-    scrollMilestonesFired.add(percentage);
-    trackCustomEvent('ScrollDepth', { percentage });
+export const trackGA4 = (eventName: string, params?: Record<string, unknown>) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', eventName, params);
   }
 };
 
-/**
- * Reset scroll milestones (useful for SPA navigation)
- */
+// ─── Clarity ────────────────────────────────────────────────────────────────
+
+export const clarityTag = (tag: string) => {
+  if (typeof window !== 'undefined' && window.clarity) {
+    window.clarity('set', 'funnel_step', tag);
+  }
+};
+
+// ─── Unified tracking (fires all 3) ────────────────────────────────────────
+
+export const trackFunnelStep = (
+  step: string,
+  params?: Record<string, unknown>
+) => {
+  // Meta Pixel custom event
+  trackCustomEvent(step, params);
+  // GA4 event
+  trackGA4(step, params);
+  // Clarity tag
+  clarityTag(step);
+};
+
+// ─── Scroll tracking ───────────────────────────────────────────────────────
+
+const scrollMilestonesFired = new Set<number>();
+
+export const trackScrollDepth = (percentage: number) => {
+  if (!scrollMilestonesFired.has(percentage)) {
+    scrollMilestonesFired.add(percentage);
+    trackFunnelStep('ScrollDepth', { percentage });
+  }
+};
+
 export const resetScrollMilestones = () => {
   scrollMilestonesFired.clear();
 };
