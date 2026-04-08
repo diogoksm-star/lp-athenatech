@@ -11,7 +11,6 @@ import {
   ChevronDown,
   Check,
   CheckCheck,
-  Shield,
   MessageCircle,
   MessageSquare,
   FileText,
@@ -64,7 +63,7 @@ const profiles = [
   {
     icon: TrendingUp,
     title: "Quem quer investir mas não sabe se pode",
-    pain: "Tem reserva de emergência? Sobra algo para investir? Sem clareza, nenhuma das duas perguntas tem resposta.",
+    pain: "Tem reserva de emergência? Sobra algo para investir? Se você não sabe, nenhuma das duas perguntas tem resposta.",
     solution: "A Athena organiza gastos e investimentos no mesmo painel.",
   },
   {
@@ -80,6 +79,7 @@ const testimonials = [
     name: "Marcos R.",
     role: "CLT + Investidor",
     avatar: "MR",
+    photo: "/assets/testimonial-marcos.jpg",
     text: "Descobri que gastava R$ 800 por mês com delivery. A Athena me mostrou isso no primeiro mês. Cortei pela metade.",
     rating: 5,
     time: "usuário há 4 meses",
@@ -89,6 +89,7 @@ const testimonials = [
     name: "Carolina S.",
     role: "Empreendedora",
     avatar: "CS",
+    photo: "/assets/testimonial-carolina.jpg",
     text: "Em 2 semanas eu já sabia pra onde ia cada centavo. Nunca fui tão organizada nas finanças na minha vida.",
     rating: 5,
     time: "usuária há 6 meses",
@@ -98,6 +99,7 @@ const testimonials = [
     name: "Juliana M.",
     role: "Professora",
     avatar: "JM",
+    photo: "/assets/testimonial-juliana.jpg",
     text: "Tentei planilha, tentei app, nada colava. A Athena funciona porque é pelo WhatsApp — já abro o dia inteiro de qualquer jeito.",
     rating: 5,
     time: "usuária há 3 meses",
@@ -107,6 +109,7 @@ const testimonials = [
     name: "Pedro A.",
     role: "Freelancer",
     avatar: "PA",
+    photo: "/assets/testimonial-pedro.jpg",
     text: "Meu dinheiro é irregular. A Athena me ajuda a saber quando posso gastar e quando tenho que segurar. Mudou tudo.",
     rating: 5,
     time: "usuário há 5 meses",
@@ -117,35 +120,35 @@ const testimonials = [
 const faqs = [
   {
     question: "A Athena acessa minha conta bancária?",
-    answer: "Não. A Athena não tem acesso a nenhuma conta, cartão ou banco. Tudo que ela sabe é o que você manda no WhatsApp. Seus dados ficam só com você — nenhuma conexão automática com bancos.",
+    answer: "Não. A Athena não acessa conta, cartão ou banco. Ela só sabe o que você manda no WhatsApp. Nenhuma conexão automática com bancos.",
   },
   {
     question: "Meus dados financeiros estão seguros?",
-    answer: "Absolutamente. Utilizamos criptografia de ponta a ponta e seguimos os mais rígidos padrões de segurança. Seus dados nunca são compartilhados com terceiros.",
+    answer: "Sim. Usamos criptografia de ponta a ponta e seus dados nunca são compartilhados com terceiros.",
   },
   {
     question: "E se eu não souber usar tecnologia?",
-    answer: "A Athena foi feita para ser simples. Se você usa WhatsApp, você já sabe usar a Athena. Basta enviar uma mensagem, foto ou áudio — ela faz o resto.",
+    answer: "Se você usa WhatsApp, já sabe usar a Athena. Manda mensagem, foto ou áudio e ela faz o resto.",
   },
   {
     question: "Preciso ter disciplina para usar?",
-    answer: "Não. A Athena foi criada justamente para quem não tem tempo ou energia para planilhas. Você manda uma mensagem quando gasta — ela organiza tudo sozinha.",
+    answer: "Não. A Athena existe justamente para quem não tem tempo nem energia para planilha. Mandou uma mensagem, ela organiza sozinha.",
   },
   {
     question: "Funciona mesmo só pelo WhatsApp?",
-    answer: "Sim! Toda a experiência de registro acontece no WhatsApp. Você também tem acesso a um dashboard completo na web para visualizar seus dados.",
+    answer: "Sim. Você registra tudo pelo WhatsApp e acompanha seus dados num dashboard na web.",
   },
   {
     question: "Posso cancelar quando quiser?",
-    answer: "Sim, sem burocracia. Você pode cancelar a qualquer momento diretamente pelo WhatsApp. Sem multas, sem pegadinhas.",
+    answer: "Sim. Cancela a qualquer momento direto pelo WhatsApp. Nada de multa, nada de pegadinha.",
   },
   {
     question: "Quanto tempo leva para ver resultados?",
-    answer: "A maioria percebe clareza financeira já na primeira semana. Em 30 dias, você terá uma visão completa de todos os seus padrões de gastos.",
+    answer: "A maioria percebe para onde o dinheiro vai já na primeira semana. Em 30 dias, você conhece todos os seus padrões de gasto.",
   },
   {
     question: "A Athena funciona para autônomos e MEIs?",
-    answer: "Sim! A Athena é ideal para MEIs, autônomos e freelancers — especialmente quem tem renda variável e precisa de mais controle.",
+    answer: "Sim. Funciona muito bem para quem tem renda variável e precisa de mais controle sobre o que entra e o que sai.",
   },
 ];
 
@@ -235,12 +238,12 @@ export const SalesPage = () => {
             className="mb-6"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-5 leading-tight">
-              Você sabe quanto{" "}
-              <span className="text-gradient">gastou esse mês?</span>
+              Organizar as finanças com a Athena é tão fácil quanto{" "}
+              <span className="text-gradient">mandar uma mensagem no WhatsApp!</span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/80 max-w-xl mx-auto">
               A Athena registra tudo que você gasta, classifica automaticamente e te mostra para onde
-              seu dinheiro foi — sem planilha, sem app novo, sem esforço. Só pelo WhatsApp.
+              seu dinheiro foi. Nada de planilha, nada de app novo. Só pelo WhatsApp.
             </p>
           </motion.div>
 
@@ -252,7 +255,7 @@ export const SalesPage = () => {
             className="flex flex-wrap justify-center gap-3 mb-10"
           >
             {[
-              { icon: Zap, label: "Via WhatsApp — zero atrito" },
+              { icon: Zap, label: "Via WhatsApp, zero atrito" },
               { icon: Bot, label: "100% automático" },
               { icon: Users, label: "+2.500 já controlam as finanças" },
             ].map(({ icon: Icon, label }) => (
@@ -382,12 +385,12 @@ export const SalesPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Você se identifica com alguma dessas situações?
             </h2>
-            <p className="text-foreground/60 text-lg">Se sim — você não está sozinho. E tem solução.</p>
+            <p className="text-foreground/60 text-lg">Se sim, você não está sozinho. E tem solução.</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-4 mb-12">
             {[
-              "Fim de mês chegou e o saldo não fecha — mas você não sabe por quê",
+              "Fim de mês chegou e o saldo não fecha, mas você não sabe por quê",
               "Tentou planilha, tentou app, desistiu em menos de uma semana",
               "Vive no \"acho que posso gastar\" sem nunca ter certeza",
               "Descobre pelo extrato que gastou muito mais do que imaginou",
@@ -419,7 +422,7 @@ export const SalesPage = () => {
                 A maioria das pessoas gasta R$ 300 a R$ 800 por mês em coisas que não lembram.
               </p>
               <p className="text-foreground/60 mt-2 text-sm">
-                Não porque são irresponsáveis — mas porque nunca viram o número escrito.
+                Não por falta de responsabilidade. É que ninguém vê o número escrito.
               </p>
             </div>
           </motion.div>
@@ -436,8 +439,8 @@ export const SalesPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              O que a Athena faz por você —{" "}
-              <span className="text-gradient">em linguagem humana.</span>
+              O que a Athena faz por você,{" "}
+              <span className="text-gradient">sem enrolação.</span>
             </h2>
           </motion.div>
 
@@ -453,7 +456,7 @@ export const SalesPage = () => {
                 icon: LayoutDashboard,
                 title: "Painel de gastos completo",
                 description:
-                  "Acesse e veja exatamente onde foi cada real: por categoria, por semana, por mês. Sem precisar entender nada de finanças para interpretar.",
+                  "Veja onde foi cada real: por categoria, por semana, por mês. Tudo visual, direto ao ponto.",
               },
               {
                 icon: Bell,
@@ -465,7 +468,7 @@ export const SalesPage = () => {
                 icon: FileText,
                 title: "Resumo mensal automático",
                 description:
-                  "Todo mês, sem você pedir, a Athena te manda um resumo completo: onde gastou mais, o que mudou em relação ao mês anterior e o quão perto está dos seus objetivos.",
+                  "Todo mês a Athena te manda um resumo: onde gastou mais, o que mudou e o quanto falta para seus objetivos.",
               },
               {
                 icon: TrendingUp,
@@ -507,7 +510,7 @@ export const SalesPage = () => {
             <div className="text-center mb-6">
               <span className="text-xs text-foreground/40 uppercase tracking-widest">Dashboard real da Athena</span>
               <h3 className="text-xl font-semibold mt-2 text-foreground">
-                Tudo em um painel. Sem precisar entender de finanças.
+                Tudo em um painel. Qualquer pessoa entende.
               </h3>
             </div>
             <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
@@ -534,7 +537,7 @@ export const SalesPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Três passos. <span className="text-gradient">Clareza total.</span>
             </h2>
-            <p className="text-foreground/60 text-lg">Sem aprender app novo. Sem precisar de disciplina sobre-humana.</p>
+            <p className="text-foreground/60 text-lg">Você não precisa aprender nada novo. Nem ter disciplina sobre-humana.</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
@@ -688,8 +691,8 @@ export const SalesPage = () => {
               <div className="space-y-4">
                 {[
                   "Registro em 10 segundos no WhatsApp que já está aberto",
-                  "Sabe exatamente onde cada real foi parar — por categoria",
-                  "Aviso antes de estourar — não depois",
+                  "Sabe onde cada real foi parar, por categoria",
+                  "Aviso antes de estourar, não depois",
                   '"Posso gastar R$ 180 este fim de semana" — com número real',
                   "Tudo automático, categorizado, sempre atualizado",
                 ].map((item) => (
@@ -730,9 +733,11 @@ export const SalesPage = () => {
               >
                 {/* Contact header */}
                 <div className="flex items-center gap-3 px-5 py-4 bg-[#202c33] border-b border-[#2a3942]">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-foreground font-bold text-sm flex-shrink-0">
-                    {t.avatar}
-                  </div>
+                  <img
+                    src={t.photo}
+                    alt={t.name}
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                  />
                   <div>
                     <p className="font-semibold text-white text-sm">{t.name}</p>
                     <p className="text-xs text-[#8696a0]">{t.role} · {t.time}</p>
@@ -785,7 +790,7 @@ export const SalesPage = () => {
               <span className="text-gradient">por mês com delivery.</span>
             </h2>
             <p className="text-foreground/60 text-lg mb-6">
-              A maioria dos usuários identifica no primeiro mês pelo menos R$ 200 em gastos desnecessários que não sabia que tinha.
+              No primeiro mês, a maioria dos usuários encontra pelo menos R$ 200 em gastos que nem lembrava que fazia.
             </p>
 
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary/10 border border-secondary/30">
@@ -860,7 +865,7 @@ export const SalesPage = () => {
                 ))}
                 <li className="flex items-center gap-3 text-foreground font-medium">
                   <Check className="w-5 h-5 text-secondary flex-shrink-0" />
-                  <span>Clareza garantida por 12 meses</span>
+                  <span>Controle total por 12 meses</span>
                 </li>
               </ul>
               <button
@@ -895,12 +900,11 @@ export const SalesPage = () => {
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
 
-            <div
-              className="w-24 h-24 rounded-full bg-gradient-to-br from-secondary to-primary flex items-center justify-center mx-auto mb-6"
-              style={{ boxShadow: "0 0 60px hsl(188 100% 50% / 0.4)" }}
-            >
-              <Shield className="w-12 h-12 text-foreground" />
-            </div>
+            <img
+              src="/assets/selo-garantia-7dias.webp"
+              alt="Selo de garantia 7 dias"
+              className="w-32 h-32 mx-auto mb-6"
+            />
 
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               7 dias para você ter certeza.{" "}
@@ -908,11 +912,11 @@ export const SalesPage = () => {
             </h2>
 
             <p className="text-foreground/60 max-w-xl mx-auto mb-2">
-              Use a Athena por 7 dias completos. Se não ver clareza real nas suas finanças, é só mandar
+              Use a Athena por 7 dias. Se não enxergar pra onde seu dinheiro vai, é só mandar
               uma mensagem no WhatsApp e devolvemos 100% do que você pagou.
             </p>
             <p className="text-foreground/60 max-w-xl mx-auto mb-6">
-              Sem formulário. Sem justificativa. Sem enrolação.
+              Nada de formulário, nada de justificativa, nada de enrolação.
             </p>
 
             <div className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-secondary/10 border border-secondary/30 text-secondary font-semibold">
@@ -972,7 +976,7 @@ export const SalesPage = () => {
           className="max-w-3xl mx-auto text-center relative z-10"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Cada mês sem clareza <span className="text-gradient">custa caro.</span>
+            Cada mês no escuro <span className="text-gradient">custa caro.</span>
           </h2>
           <p className="text-xl text-foreground/60 mb-8">
             Junte-se às +2.500 pessoas que pararam de perder dinheiro sem saber por quê.
@@ -1009,7 +1013,7 @@ export const SalesPage = () => {
           </motion.button>
 
           <p className="mt-6 text-sm text-foreground/50">
-            Sem cartão para testar. Cancele quando quiser. 7 dias de garantia total.
+            Teste grátis por 7 dias. Cancele quando quiser.
           </p>
         </motion.div>
       </section>
@@ -1023,8 +1027,7 @@ export const SalesPage = () => {
                 <img src={athenaLogo} alt="Athena" className="h-8 w-auto" />
               </div>
               <p className="text-foreground/50 text-sm mb-4">
-                Controle financeiro automático via WhatsApp e dashboard. Transforme sua relação com o
-                dinheiro de forma simples e inteligente.
+                Controle financeiro automático via WhatsApp e dashboard. Você manda o gasto, a Athena organiza tudo.
               </p>
               <div className="flex gap-4">
                 <a
